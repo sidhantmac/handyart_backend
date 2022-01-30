@@ -1,6 +1,6 @@
 const { USER } = require("../config/db.config");
 const db = require("../models");
-const User = db.user;
+const Category = db.category;
 const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
@@ -12,28 +12,13 @@ exports.create = (req, res) => {
     return;
   }
 
-  if (!req.body.password) {
-    res.status(400).send({
-      message: "Password can not be empty!"
-    });
-    return;
-  }
-  if (!req.body.password.length < 8) {
-    res.status(400).send({
-      message: "Password should be more than 8 digits!"
-    });
-    return;
-  }
-
-
-  // Create a Tutorial
-  const user = {
+  // Create a Category
+  const category = {
     name: req.body.name,
-    password: req.body.password
   };
 
-  // Save Tutorial in the database
-  User.create(user)
+  // Save Category in the database
+  Category.create(category)
     .then(data => {
       res.send(data);
     })
